@@ -2,7 +2,7 @@
 
 export var country_images = {
     "vietnam": {
-        "Bun Bo Hue": 3,
+        "Bun Bo Hue": 2,
         "Goi Cuon": 6,
         "Pho": 5,
         "Banh Xeo": 2,
