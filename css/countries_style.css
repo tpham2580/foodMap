@@ -1,3 +1,11 @@
-ol {
-    list-style-type: none;
+.background {
+    background-color: #f3f1ec;
+}
+
+.background-yellow {
+    background-color: #fcf7d8;
+}
+
+.background-red {
+    background-color: #fbdde0;
 }
