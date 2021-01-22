@@ -1,9 +1,22 @@
 // js is for all country htmls
 // will generate page depending on each country
 
-import * as c_image_amounts from "./country_image_amounts.js"
-import * as countries_3_letter from "./countries_3_letter.js"
+//import * as c_image_amounts from "./country_image_amounts.js"
+//import * as countries_3_letter from "./countries_3_letter.js"
+var c_image_amounts;
+var countries_3_letter;
+fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
+    c_image_amounts = json;
+})
+.then(fetch("../website_json/countries_3_letter.json").then(response => response.json()).then(json => {
+    countries_3_letter = json;
+    time_to_fetch();
+}));
 
+
+function console_that(val){
+    console.log(val)
+}
 
 
 // gets the country name from the path
@@ -11,12 +24,17 @@ var path = window.location.pathname;
 var page = path.split("/").pop();
 var name_country = page.split('.').slice(0, -1).join('.').toString();
 
-var fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_3_letter.get_countries[name_country];
+var fetch_url // sets the fetch_url variable
 
 // fetch response to get json data of all dishes from specified country
-fetch(fetch_url).then(response => response.json()).then(json => {
+function time_to_fetch(){
+    fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_3_letter[name_country];
+    fetch(fetch_url).then(response => response.json()).then(json => {
                 main(json);
         }).catch(err => console.log(err));
+}
+
+
 
 // gets the main container by id "main"
 var main_container = document.getElementById("main");
@@ -29,7 +47,7 @@ function picture_carousel(dish){
     var dish_name = dish["name"];
     var dish_name_w_dashes = dish_name.replace(/\s+/g, "-");
     console.log(dish_name_w_dashes);
-    var amount_images = c_image_amounts.country_images[name_country][dish_name.toString()];
+    var amount_images = c_image_amounts[name_country][dish_name.toString()];
     console.log(amount_images);
 
     // create div with id="foodCarousel-" + dish_name_w_dashes, class="carousel slide" and data-bs-ride="carousel"
@@ -175,9 +193,12 @@ function create_dish_info(dish){
     dish_col.appendChild(dish_def_char_h4);
     dish_col.appendChild(dish_def_char_p);
 
+    // add break
+    dish_col.appendChild(document.createElement("br"));
+
     // create impressions
     var dish_impressions_h4 = document.createElement("h4");
-    dish_impressions_h4.textContent = "Impressions";
+    dish_impressions_h4.textContent = "Thoughts & Impressions";
     var dish_impressions_p = document.createElement("p");
     dish_impressions_p.setAttribute("class", "border border-warning bg-light p-3");
     dish_impressions_p.textContent = dish["impressions"];
@@ -192,6 +213,7 @@ function create_dish_info(dish){
     var dish_recipe_a = document.createElement("a");
     dish_recipe_a.setAttribute("class", "btn btn-warning");
     dish_recipe_a.setAttribute("href", dish["recipe"]);
+    dish_recipe_a.setAttribute("target", "_blank");  // opens link in new tab
     dish_recipe_a.setAttribute("role", "button");
     dish_recipe_a.textContent = "Favorite Recipe";
     dish_col.appendChild(dish_recipe_a);
@@ -217,6 +239,15 @@ function create_section(dish_data){
 }
 
 function main(data){
+
+    // add title heading to page
+    var country_h1 = document.createElement("h1");
+    country_h1.setAttribute("class", "display-3 text-center");
+    country_h1.textContent = name_country.toUpperCase();
+    main_container.appendChild(country_h1);
+
+    // add horizontal line
+    main_container.appendChild(document.createElement("hr"));
 
     var data_length = Object.keys(data).length;
     for (var i=0; i<data_length; i++){
