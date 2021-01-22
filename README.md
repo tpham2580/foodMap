@@ -5,9 +5,9 @@
 Tim's Food Map is a website that displays all of the different dishes I have ever tried/made.
 
 #### Current Features
-- [X]  Clicking on blue-highlighted countries on map or countries from dropdown menu will navigate to specific country page
-- [X]  Picture carousel of all pictures taken for that specific dish
+- [X]  Clicking on blue-highlighted countries on map or countries from dropdown menu in the Home page will navigate to specific country page
 - [X]  Country page successfully receives json information of all dishes for country from Django Web Server
+- [X]  Picture carousel of all pictures taken for that specific dish
 - [X]  Page for specified country will populate with picture carousel and information for all dishes from json
 - [X]  Button in each dish information section that navigates to website of favorite recipe for the dish
 - [X]  Countries page properly resizes depending on screen size
