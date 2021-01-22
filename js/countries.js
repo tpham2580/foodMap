@@ -5,10 +5,22 @@
 //import * as countries_3_letter from "./countries_3_letter.js"
 var c_image_amounts;
 var countries_3_letter;
-fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
+fetch("../website_json/country_image_amounts.json", {
+        mode: 'cors',
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        }
+    }
+    ).then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
-.then(fetch("../website_json/countries_3_letter.json").then(response => response.json()).then(json => {
+.then(fetch("../website_json/countries_3_letter.json", {
+        mode: 'cors',
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        }
+    }
+    ).then(response => response.json()).then(json => {
     countries_3_letter = json;
     time_to_fetch();
 }));
@@ -29,7 +41,12 @@ var fetch_url // sets the fetch_url variable
 // fetch response to get json data of all dishes from specified country
 function time_to_fetch(){
     fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_3_letter[name_country];
-    fetch(fetch_url).then(response => response.json()).then(json => {
+    fetch(fetch_url, {
+        mode: 'cors',
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        }
+    }).then(response => response.json()).then(json => {
                 main(json);
         }).catch(err => console.log(err));
 }
