@@ -21,6 +21,7 @@ Tim's Food Map is a website that displays all of the different dishes I have eve
 - [ ]  Bookmarked dish in Home page will be draggable
 - [ ]  Option to select bookmarked dish on Home page and generate a pdf of recipes for each selected dish
 - [ ]  Button to randomly select a country and navigate to that country page
+- [ ]  Added video walkthrough to README.md
 
 ## 🔨 Tim's Food Map is built with
   - [Bootstrap](https://getbootstrap.com/)
