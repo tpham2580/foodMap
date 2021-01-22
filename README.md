@@ -2,7 +2,7 @@
 
 ## Overview
 ### Description
-Tim's Food Map is a website that displays all of the different dishes I have every tried/made.
+Tim's Food Map is a website that displays all of the different dishes I have ever tried/made.
 
 ## 🔨 Tim's Food Map is built with
   - [Bootstrap](https://getbootstrap.com/)
