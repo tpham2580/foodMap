@@ -6,18 +6,18 @@
 var c_image_amounts;
 var countries_3_letter;
 fetch("../website_json/country_image_amounts.json", {
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
-            'Access-Control-Allow-Origin':'*'
+            'Content-Type':'application/x-www-form-urlencoded'
         }
     }
     ).then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
 .then(fetch("../website_json/countries_3_letter.json", {
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
-            'Access-Control-Allow-Origin':'*'
+            'Content-Type':'application/x-www-form-urlencoded'
         }
     }
     ).then(response => response.json()).then(json => {
@@ -44,9 +44,10 @@ function time_to_fetch(){
     fetch(fetch_url, {
         mode: 'cors',
         headers: {
-            'Access-Control-Allow-Origin':'*'
+            'Content-Type':'application/x-www-form-urlencoded'
         }
     }).then(response => response.json()).then(json => {
+                console.log(json.body);
                 main(json);
         }).catch(err => console.log(err));
 }
