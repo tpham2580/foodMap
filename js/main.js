@@ -18,7 +18,9 @@ var map = new Datamap({
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
             if (geography.id in added_countries){
                 //creates the href to country html by first checking if country is already added
-                let country_href = "../html/" + added_countries[geography.id];
+                let current_href = window.location.href.toString();
+                current_href = current_href.substring(0, current_href.length - 11);
+                let country_href = current_href + "/html/" + added_countries[geography.id];
                 window.location.href = country_href;
             }
             
