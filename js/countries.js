@@ -25,12 +25,6 @@ fetch("../website_json/country_image_amounts.json", {
     time_to_fetch();
 }));
 
-
-function console_that(val){
-    console.log(val)
-}
-
-
 // gets the country name from the path
 var path = window.location.pathname;
 var page = path.split("/").pop();
@@ -40,14 +34,13 @@ var fetch_url // sets the fetch_url variable
 
 // fetch response to get json data of all dishes from specified country
 function time_to_fetch(){
-    fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_3_letter[name_country];
+    fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_3_letter[name_country] + "/";
     fetch(fetch_url, {
         mode: 'cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
         }
     }).then(response => response.json()).then(json => {
-                console.log(json.body);
                 main(json);
         }).catch(err => console.log(err));
 }
@@ -64,9 +57,7 @@ function picture_carousel(dish){
 
     var dish_name = dish["name"];
     var dish_name_w_dashes = dish_name.replace(/\s+/g, "-");
-    console.log(dish_name_w_dashes);
     var amount_images = c_image_amounts[name_country][dish_name.toString()];
-    console.log(amount_images);
 
     // create div with id="foodCarousel-" + dish_name_w_dashes, class="carousel slide" and data-bs-ride="carousel"
     var food_carousel = document.createElement("div");
@@ -168,8 +159,6 @@ function picture_carousel(dish){
 function create_dish_info(dish){
     var dish_col = document.createElement("div");
     dish_col.setAttribute("class", "col-xxl-6 col-xl-12 p-4");
-
-    console.log(dish);
 
     // create title row with cuisine tag
     var dish_title_row = document.createElement("div");
