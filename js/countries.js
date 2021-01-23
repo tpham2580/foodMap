@@ -192,9 +192,18 @@ function create_dish_info(dish){
         var dish_bookmark_div = document.createElement("div");
         dish_bookmark_div.setAttribute("class", "col-auto float-left");
 
-            var dish_bookmark_i = document.createElement("i");
-            dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 m-0 fs-3 float-right bookmark-dish-unchecked");
-            dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
+            // checks if dish is bookmarked in localStorage
+            if (dish["name"] in localStorage){
+                var dish_bookmark_i = document.createElement("i");
+                dish_bookmark_i.setAttribute("class", "fa fa-bookmark p-0 m-0 fs-3 float-right bookmark-dish-checked");
+                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
+            } else {
+                var dish_bookmark_i = document.createElement("i");
+                dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 m-0 fs-3 float-right bookmark-dish-unchecked");
+                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
+            }
+
+            
 
         dish_bookmark_div.appendChild(dish_bookmark_i);
         dish_button_row.appendChild(dish_bookmark_div);
@@ -269,10 +278,20 @@ document.body.onclick = function(e) {   //when the document body is clicked
 
     if ((e.className && e.className.indexOf('bookmark-dish-unchecked') != -1) || (e.className && e.className.indexOf('bookmark-dish-checked') != -1)) {
         if (e.className && e.className.indexOf('bookmark-dish-unchecked') != -1){
+
+            // get the h1 dish title and add it to local storage
+            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[0].children[0].textContent;
+            localStorage.setItem(bookmark_dish_name.toString(), "checked");
+
             //if the element has a class name, and that is 'bookmark-dish' then...
             e.className = "fa fa-bookmark p-0 fs-3 m-0 float-right bookmark-dish-checked";
             e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
         } else if (e.className && e.className.indexOf('bookmark-dish-checked') != -1){
+
+            // get the h1 dish title and add it to local storage
+            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[0].children[0].textContent;
+            localStorage.removeItem(bookmark_dish_name.toString());
+
             e.className = "fa fa-bookmark-o p-0 fs-3 m-0 float-right bookmark-dish-unchecked";
             e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
             //if the element has a class name, and that is 'bookmark-dish' then...
