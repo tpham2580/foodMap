@@ -1,7 +1,7 @@
 
 var c_image_amounts;
 var countries_reference;
-fetch("../website_json/country_image_amounts.json", {
+fetch("./website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
@@ -10,7 +10,7 @@ fetch("../website_json/country_image_amounts.json", {
     ).then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
-.then(fetch("../website_json/countries_reference.json", {
+.then(fetch("./website_json/countries_reference.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
