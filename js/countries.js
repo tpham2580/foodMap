@@ -196,7 +196,7 @@ function create_dish_info(dish){
             dish_bookmark_button.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"];
 
             var dish_bookmark_i = document.createElement("i");
-            dish_bookmark_i.setAttribute("class", "far fa-bookmark p-1 float-right");
+            dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 fs-4 float-right bookmark-dish-unchecked");
             dish_bookmark_button.appendChild(dish_bookmark_i);
 
         dish_bookmark_div.appendChild(dish_bookmark_button);
@@ -260,6 +260,29 @@ function create_section(dish_data){
 
     return section_container
 }
+
+// bookmark event handler for each country page for all buttons with bookmark-dish
+document.body.onclick = function(e) {   //when the document body is clicked
+    e.preventDefault();
+    if (window.event) {
+        e = event.srcElement;           //assign the element clicked to e (IE 6-8)
+    }
+    else {
+        e = e.target;                   //assign the element clicked to e
+    }
+
+    if ((e.className && e.className.indexOf('bookmark-dish-unchecked') != -1) || (e.className && e.className.indexOf('bookmark-dish-checked') != -1)) {
+        if (e.className && e.className.indexOf('bookmark-dish-unchecked') != -1){
+            //if the element has a class name, and that is 'bookmark-dish' then...
+            e.className = "fa fa-bookmark p-0 fs-4 float-right bookmark-dish-checked";
+        } else if (e.className && e.className.indexOf('bookmark-dish-checked') != -1){
+            e.className = "fa fa-bookmark-o p-0 fs-4 float-right bookmark-dish-unchecked";
+            //if the element has a class name, and that is 'bookmark-dish' then...
+        }
+        
+    }
+}
+  
 
 function main(data){
 
