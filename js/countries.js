@@ -187,12 +187,12 @@ function create_dish_info(dish){
 
     // create button row
     var dish_button_row = document.createElement("div");
-    dish_button_row.setAttribute("class", "row justify-content-end m-0");
+    dish_button_row.setAttribute("class", "row justify-content-end m-0 p-0");
 
         var dish_bookmark_div = document.createElement("div");
         dish_bookmark_div.setAttribute("class", "col-auto float-left");
             var dish_bookmark_button = document.createElement("button");
-            dish_bookmark_button.setAttribute("class", "btn");
+            dish_bookmark_button.setAttribute("class", "btn m-0");
             dish_bookmark_button.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"];
 
             var dish_bookmark_i = document.createElement("i");
