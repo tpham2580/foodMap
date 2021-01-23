@@ -191,15 +191,12 @@ function create_dish_info(dish){
 
         var dish_bookmark_div = document.createElement("div");
         dish_bookmark_div.setAttribute("class", "col-auto float-left");
-            var dish_bookmark_button = document.createElement("button");
-            dish_bookmark_button.setAttribute("class", "btn m-0");
-            dish_bookmark_button.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"];
 
             var dish_bookmark_i = document.createElement("i");
-            dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 fs-4 float-right bookmark-dish-unchecked");
-            dish_bookmark_button.appendChild(dish_bookmark_i);
+            dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 m-0 fs-3 float-right bookmark-dish-unchecked");
+            dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
 
-        dish_bookmark_div.appendChild(dish_bookmark_button);
+        dish_bookmark_div.appendChild(dish_bookmark_i);
         dish_button_row.appendChild(dish_bookmark_div);
     dish_col.appendChild(dish_button_row);
 
@@ -263,7 +260,6 @@ function create_section(dish_data){
 
 // bookmark event handler for each country page for all buttons with bookmark-dish
 document.body.onclick = function(e) {   //when the document body is clicked
-    e.preventDefault();
     if (window.event) {
         e = event.srcElement;           //assign the element clicked to e (IE 6-8)
     }
@@ -274,9 +270,11 @@ document.body.onclick = function(e) {   //when the document body is clicked
     if ((e.className && e.className.indexOf('bookmark-dish-unchecked') != -1) || (e.className && e.className.indexOf('bookmark-dish-checked') != -1)) {
         if (e.className && e.className.indexOf('bookmark-dish-unchecked') != -1){
             //if the element has a class name, and that is 'bookmark-dish' then...
-            e.className = "fa fa-bookmark p-0 fs-4 float-right bookmark-dish-checked";
+            e.className = "fa fa-bookmark p-0 fs-3 m-0 float-right bookmark-dish-checked";
+            e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
         } else if (e.className && e.className.indexOf('bookmark-dish-checked') != -1){
-            e.className = "fa fa-bookmark-o p-0 fs-4 float-right bookmark-dish-unchecked";
+            e.className = "fa fa-bookmark-o p-0 fs-3 m-0 float-right bookmark-dish-unchecked";
+            e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
             //if the element has a class name, and that is 'bookmark-dish' then...
         }
         
