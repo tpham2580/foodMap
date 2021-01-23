@@ -21,7 +21,7 @@ fetch("../website_json/country_image_amounts.json", {
     main_one();
 }));
 
-function main_one(country_ref){
+function main_one(){
 
     // creates a new map
     var map = new Datamap({
