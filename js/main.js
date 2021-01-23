@@ -1,8 +1,8 @@
 
 var added_countries =   {
                         "VNM": "vietnam.html", 
-                        //"USA": "united-states.html",
-                        //"JPN": "united-states.html",
+                        "USA": "united-states.html",
+                        "JPN": "japan.html",
                         //"IND": "united-states.html",
                         };
 
@@ -34,9 +34,9 @@ var map = new Datamap({
 
     // adds all countries that need a new fill color from default
     data: {
-        //USA: {fillKey: 'Countries of Food Eaten'},
+        USA: {fillKey: 'Countries of Food Eaten'},
         VNM: {fillKey: 'Countries of Food Eaten'},
-        //JPN: {fillKey: 'Countries of Food Eaten'},
+        JPN: {fillKey: 'Countries of Food Eaten'},
         //IND: {fillKey: 'Countries of Food Eaten'},
     }
 

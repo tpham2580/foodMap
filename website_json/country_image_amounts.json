@@ -1,9 +1,25 @@
 {
     "vietnam":
         {
+            "background-color": "yellow",
+            "bootstrap-color": "warning",
             "Bun Bo Hue": 2,
             "Goi Cuon": 6,
             "Pho": 5,
             "Banh Xeo": 2
+        },
+    "japan": 
+        {
+            "background-color": "red",
+            "bootstrap-color": "danger",
+            "Ramen": 11,
+            "Shabu-shabu": 3,
+            "Sukiyaki": 4
+        },
+    "united-states":
+        {
+            "background-color": "blue",
+            "bootstrap-color": "primary",
+            "Gumbo": 4
         }
 }

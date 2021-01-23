@@ -171,20 +171,33 @@ function create_dish_info(dish){
             dish_title_h2.setAttribute("class", "text-dark");
             dish_title_h2.textContent = dish["name"];
         dish_title_div.appendChild(dish_title_h2);
+        dish_title_row.appendChild(dish_title_div);
 
         // *** add start button here in future update ***
 
         // create button for cuisine name and append it to dish_col
         var dish_cuisine_div = document.createElement("div");
-        dish_cuisine_div.setAttribute("class", "col float-right");
+        dish_cuisine_div.setAttribute("class", "col-auto float-right");
             var dish_cuisine_a = document.createElement("a");
-            dish_cuisine_a.setAttribute("class", "btn btn-outline-warning bg-light text-dark disabled");
+            dish_cuisine_a.setAttribute("class", "btn bg-light text-dark disabled");
+            dish_cuisine_a.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"]
             dish_cuisine_a.textContent = dish["cuisine"];
         dish_cuisine_div.appendChild(dish_cuisine_a);
+        dish_title_row.appendChild(dish_cuisine_div);
+
+        // add area if not equal to country name
+        if (dish["area"].toLowerCase() !== name_country){
+            var dish_area_div = document.createElement("div");
+            dish_area_div.setAttribute("class", "col-auto float-right");
+                var dish_area_a = document.createElement("a");
+                dish_area_a.setAttribute("class", "btn bg-light text-dark disabled");
+                dish_area_a.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"]
+                dish_area_a.textContent = dish["area"];
+            dish_area_div.appendChild(dish_area_a);
+            dish_title_row.appendChild(dish_area_div);
+        }
 
     // append everything in title row to dish_col
-    dish_title_row.appendChild(dish_title_div);
-    dish_title_row.appendChild(dish_cuisine_div);
     dish_col.appendChild(dish_title_row);
 
     // add horizontal line
@@ -194,7 +207,8 @@ function create_dish_info(dish){
     var dish_def_char_h4 = document.createElement("h4");
     dish_def_char_h4.textContent = "Defining Characteristics";
     var dish_def_char_p = document.createElement("p");
-    dish_def_char_p.setAttribute("class", "border border-warning bg-light p-3");
+    dish_def_char_p.setAttribute("class", "border bg-light p-3");
+    dish_def_char_p.className += " border-" + c_image_amounts[name_country]["bootstrap-color"]
     dish_def_char_p.textContent = dish["defining_char"];
     // append the defining char title and the content
     dish_col.appendChild(dish_def_char_h4);
@@ -207,7 +221,8 @@ function create_dish_info(dish){
     var dish_impressions_h4 = document.createElement("h4");
     dish_impressions_h4.textContent = "Thoughts & Impressions";
     var dish_impressions_p = document.createElement("p");
-    dish_impressions_p.setAttribute("class", "border border-warning bg-light p-3");
+    dish_impressions_p.setAttribute("class", "border bg-light p-3");
+    dish_impressions_p.className += " border-" + c_image_amounts[name_country]["bootstrap-color"]
     dish_impressions_p.textContent = dish["impressions"];
     // append the defining char title and the content
     dish_col.appendChild(dish_impressions_h4);
@@ -218,7 +233,8 @@ function create_dish_info(dish){
 
     // create button with link to favorite recipe
     var dish_recipe_a = document.createElement("a");
-    dish_recipe_a.setAttribute("class", "btn btn-warning");
+    dish_recipe_a.setAttribute("class", "btn");
+    dish_recipe_a.className += " btn-" + c_image_amounts[name_country]["bootstrap-color"]
     dish_recipe_a.setAttribute("href", dish["recipe"]);
     dish_recipe_a.setAttribute("target", "_blank");  // opens link in new tab
     dish_recipe_a.setAttribute("role", "button");
@@ -231,8 +247,8 @@ function create_dish_info(dish){
 //creates section for dish
 function create_section(dish_data){
     var section_container = document.createElement("div");
-    section_container.setAttribute("class", "container-fluid background-yellow rounded p-0 my-5 center-block shadow-lg");
-    //section_container.setAttribute("style", "border: 0.05rem solid black; box-shadow: 0.50rem 0.50rem 0.25rem 0.25rem #969696");
+    section_container.setAttribute("class", "container-fluid rounded p-0 my-5 center-block shadow-lg");
+    section_container.className += " background-" + c_image_amounts[name_country]["background-color"];
 
     var new_row = document.createElement("div");
     new_row.setAttribute("class", "row justify-content-evenly m-auto align-center");
