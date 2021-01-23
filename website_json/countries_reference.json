@@ -1,0 +1,16 @@
+{
+    "3-to-country":
+        {
+            "VNM": "Vietnam", 
+            "USA": "United-States",
+            "JPN": "Japan"
+        },
+    
+    "country-to-3":
+        {
+            "vietnam": "VNM",
+            "united-states": "USA",
+            "japan": "JPN"
+        }
+    
+}
