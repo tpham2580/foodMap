@@ -31,8 +31,6 @@ function time_to_fetch(){
         }).catch(err => console.log(err));
 }
 
-
-
 // gets the main container by id "main"
 var main_container = document.getElementById("main");
 
@@ -144,7 +142,7 @@ function picture_carousel(dish){
 // creates dish information
 function create_dish_info(dish){
     var dish_col = document.createElement("div");
-    dish_col.setAttribute("class", "col-xxl-6 col-xl-12 p-4");
+    dish_col.setAttribute("class", "col-xxl-6 col-xl-12 px-4 py-2");
 
     // create title row with cuisine tag
     var dish_title_row = document.createElement("div");
@@ -153,13 +151,11 @@ function create_dish_info(dish){
         // create dish title in title div to float left
         var dish_title_div = document.createElement("div");
         dish_title_div.setAttribute("class", "col-fluid float-left");
-            var dish_title_h2 = document.createElement("h2");
-            dish_title_h2.setAttribute("class", "text-dark");
-            dish_title_h2.textContent = dish["name"];
-        dish_title_div.appendChild(dish_title_h2);
+            var dish_title_h1 = document.createElement("h1");
+            dish_title_h1.setAttribute("class", "text-dark");
+            dish_title_h1.textContent = dish["name"];
+        dish_title_div.appendChild(dish_title_h1);
         dish_title_row.appendChild(dish_title_div);
-
-        // *** add start button here in future update ***
 
         // create button for cuisine name and append it to dish_col
         var dish_cuisine_div = document.createElement("div");
@@ -188,6 +184,24 @@ function create_dish_info(dish){
 
     // add horizontal line
     dish_col.appendChild(document.createElement("hr"));
+
+    // create button row
+    var dish_button_row = document.createElement("div");
+    dish_button_row.setAttribute("class", "row justify-content-end m-0");
+
+        var dish_bookmark_div = document.createElement("div");
+        dish_bookmark_div.setAttribute("class", "col-auto float-left");
+            var dish_bookmark_button = document.createElement("button");
+            dish_bookmark_button.setAttribute("class", "btn");
+            dish_bookmark_button.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"];
+
+            var dish_bookmark_i = document.createElement("i");
+            dish_bookmark_i.setAttribute("class", "far fa-bookmark p-1 float-right");
+            dish_bookmark_button.appendChild(dish_bookmark_i);
+
+        dish_bookmark_div.appendChild(dish_bookmark_button);
+        dish_button_row.appendChild(dish_bookmark_div);
+    dish_col.appendChild(dish_button_row);
 
     // create defining characteristics
     var dish_def_char_h4 = document.createElement("h4");
