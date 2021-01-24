@@ -1,6 +1,8 @@
 
 var c_image_amounts;
 var countries_reference;
+var post_bookmark_json = {"bookmarks": {}};
+var bookmarked_json;
 fetch("./website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
@@ -18,8 +20,47 @@ fetch("./website_json/country_image_amounts.json", {
     }
     ).then(response => response.json()).then(json => {
     countries_reference = json;
-    main_one();
-}));
+})
+.then( response => {
+    fetch_bookmarks();
+}
+
+));
+
+// fetch response to get json data of all dishes from specified country
+function fetch_bookmarks(){
+
+    var dict_local_storage = {};
+    var keys_dict = Object.keys(localStorage);
+    var length_local = keys_dict.length;
+
+    for (var i = 0; i < length_local; i++){
+        dict_local_storage[keys_dict[i]] = localStorage[keys_dict[i]]
+    }
+
+    // turn the dictionary into form data
+    var formBody = [];
+    for (var property in dict_local_storage) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(localStorage[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+        }
+    formBody = formBody.join("&");
+    var fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/bookmarked/";
+    fetch(fetch_url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: formBody
+        }
+    ).then(response => response.json()).then(json => {
+            bookmarked_json = json;
+            console.log(bookmarked_json);
+            main_one();
+        }).catch(err => console.log(err));
+}
 
 function main_one(){
 
