@@ -57,7 +57,6 @@ function fetch_bookmarks(){
         }
     ).then(response => response.json()).then(json => {
             bookmarked_json = json;
-            console.log(bookmarked_json);
             main_one();
         }).catch(err => console.log(err));
 }
