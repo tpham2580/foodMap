@@ -1,12 +1,10 @@
-
-import picture_carousel from "./countries.js"
+import picture_carousel from './countries.js';
 
 var c_image_amounts;
 var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
-var main_container = document.getElementById("main-container")
-fetch(window.location.href + "/website_json/country_image_amounts.json", {
+fetch(window.location + "/website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
@@ -15,7 +13,7 @@ fetch(window.location.href + "/website_json/country_image_amounts.json", {
     ).then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
-.then(fetch(window.location.href + "/website_json/countries_reference.json", {
+.then(fetch(window.location + "/website_json/countries_reference.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
@@ -76,9 +74,7 @@ function main_one(){
         // adds a function on click
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                console.log(geography.id);
                 if (geography.id in countries_reference["3-to-country"]){
-                    console.log(geography.id);
                     //creates the href to country html by first checking if country is already added
                     let country_href = window.location.href + "html/" + countries_reference["3-to-country"][geography.id].toLowerCase() + ".html";
                     window.location.href = country_href;
@@ -111,6 +107,8 @@ function main_one(){
     // add countries to dropdown
     add_dropdown_countries();
 
+    var main_container = document.getElementById("main-container");
+
     main_container.appendChild(document.createElement("br"));
 
     var bookmark_h1 =document.createElement("h1");
@@ -123,7 +121,6 @@ function main_one(){
     var bookmarked_dishes_row = document.createElement("div");
     bookmarked_dishes_row.setAttribute("class", "row justify-content-center");
     for (var dishes=0; dishes<bookmarked_json.length; dishes++){
-        console.log(bookmarked_json[dishes]);
         let name_country = bookmarked_json[dishes]["country"].toLowerCase();
         var bookmark_dish = document.createElement("div");
         bookmark_dish.setAttribute("class", "col-5 col-lg-5 col-sm-12 my-3 mx-2 p-0 justify-content-center");

@@ -1,8 +1,10 @@
 
+
 // will generate page depending on each country
 
 var c_image_amounts;
 var countries_reference;
+
 fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
@@ -27,15 +29,12 @@ function time_to_fetch(){
             'Content-Type':'application/x-www-form-urlencoded'
         }
     }).then(response => response.json()).then(json => {
-                main(json);
+                main_function(json);
         }).catch(err => console.log(err));
 }
 
-// gets the main container by id "main"
-var main_container = document.getElementById("main");
-
 // creates picture_carousel
-function picture_carousel(dish, name_country){
+export default function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
     new_col.setAttribute("class", "col-xxl-6 col-xl-12 p-0 my-auto");
 
@@ -138,8 +137,6 @@ function picture_carousel(dish, name_country){
 
     return new_col
 }
-
-export default picture_carousel
 
 // creates dish information
 function create_dish_info(dish){
@@ -305,7 +302,14 @@ document.body.onclick = function(e) {   //when the document body is clicked
 }
   
 
-function main(data){
+function main_function(data){
+
+    if (document.getElementById("main") == null){
+        return
+    }
+
+    // gets the main container by id "main"
+    var main_container = document.getElementById("main");
 
     // add title heading to page
     var country_h1 = document.createElement("h1");
