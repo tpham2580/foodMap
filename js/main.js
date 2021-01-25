@@ -4,27 +4,14 @@ var c_image_amounts;
 var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
-console.log(window.location.href);
-var fetch_href = window.location.href;
-console.log(window.location.href + "  WHOOOOOPPPPSSS");
-fetch(fetch_href + "website_json/country_image_amounts.json", {
-        mode: 'no-cors',
-        headers: {
-            'Content-Type':'application/x-www-form-urlencoded'
-        }
-    }
-    ).then(res => res.json()).then(json => {
-    c_image_amounts = json;
+fetch("./website_json/country_image_amounts.json")
+    .then(res => res.json()).then(json => {
+        c_image_amounts = json;
 })
-.then(fetch(fetch_href + "website_json/countries_reference.json", {
-        mode: 'no-cors',
-        headers: {
-            'Content-Type':'application/x-www-form-urlencoded'
-        }
-    }
-    ).then(response => response.json()).then(json => {
-    countries_reference = json;
-})
+.then(fetch("./website_json/countries_reference.json")
+    .then(response => response.json()).then(json => {
+        countries_reference = json;
+    })
 .then( response => {
     fetch_bookmarks();
 }
