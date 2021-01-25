@@ -1,8 +1,11 @@
 
+import picture_carousel from "./countries.js"
+
 var c_image_amounts;
 var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
+var main_container = document.getElementById("main-container")
 fetch("./website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
@@ -107,6 +110,36 @@ function main_one(){
 
     // add countries to dropdown
     add_dropdown_countries();
+
+    main_container.appendChild(document.createElement("br"));
+
+    var bookmark_h1 =document.createElement("h1");
+    bookmark_h1.textContent = "Bookmarked Dishes";
+    main_container.appendChild(bookmark_h1);
+
+    main_container.appendChild(document.createElement("hr"))
+
+    // do picture carousel
+    var bookmarked_dishes_row = document.createElement("div");
+    bookmarked_dishes_row.setAttribute("class", "row justify-content-center");
+    for (var dishes=0; dishes<bookmarked_json.length; dishes++){
+        console.log(bookmarked_json[dishes]);
+        let name_country = bookmarked_json[dishes]["country"].toLowerCase();
+        var bookmark_dish = document.createElement("div");
+        bookmark_dish.setAttribute("class", "col-5 col-lg-5 col-sm-12 my-3 mx-2 p-0 justify-content-center");
+
+        var bookmark_name = document.createElement("h3");
+        bookmark_name.setAttribute("class", "text-center")
+        bookmark_name.textContent = bookmarked_json[dishes]["name"];
+
+        bookmark_dish.appendChild(bookmark_name);
+        
+        var picture_carousel_bookmark = picture_carousel(bookmarked_json[dishes], name_country);
+        picture_carousel_bookmark.className += " w-100";
+        bookmark_dish.appendChild(picture_carousel_bookmark);
+        bookmarked_dishes_row.appendChild(bookmark_dish);
+    }
+    main_container.appendChild(bookmarked_dishes_row);
 
 };
 /* 

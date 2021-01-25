@@ -35,9 +35,9 @@ function time_to_fetch(){
 var main_container = document.getElementById("main");
 
 // creates picture_carousel
-function picture_carousel(dish){
+function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
-    new_col.setAttribute("class", "col-xxl-6 col-xl-12 m-auto p-0 align-center");
+    new_col.setAttribute("class", "col-xxl-6 col-xl-12 p-0 my-auto");
 
     var dish_name = dish["name"];
     var dish_name_w_dashes = dish_name.replace(/\s+/g, "-");
@@ -139,10 +139,36 @@ function picture_carousel(dish){
     return new_col
 }
 
+export default picture_carousel
+
 // creates dish information
 function create_dish_info(dish){
     var dish_col = document.createElement("div");
     dish_col.setAttribute("class", "col-xxl-6 col-xl-12 px-4 py-2");
+
+    // create button row
+    var dish_button_row = document.createElement("div");
+    dish_button_row.setAttribute("class", "row justify-content-end m-0 p-0");
+
+        var dish_bookmark_div = document.createElement("div");
+        dish_bookmark_div.setAttribute("class", "col-auto float-left");
+
+            // checks if dish is bookmarked in localStorage
+            if (dish["name"] in localStorage){
+                var dish_bookmark_i = document.createElement("i");
+                dish_bookmark_i.setAttribute("class", "fa fa-bookmark p-0 mt-3 fs-3 float-right bookmark-dish-checked");
+                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
+            } else {
+                var dish_bookmark_i = document.createElement("i");
+                dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 mt-3 fs-3 float-right bookmark-dish-unchecked");
+                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
+            }
+
+            
+
+        dish_bookmark_div.appendChild(dish_bookmark_i);
+        dish_button_row.appendChild(dish_bookmark_div);
+    dish_col.appendChild(dish_button_row);
 
     // create title row with cuisine tag
     var dish_title_row = document.createElement("div");
@@ -184,30 +210,6 @@ function create_dish_info(dish){
 
     // add horizontal line
     dish_col.appendChild(document.createElement("hr"));
-
-    // create button row
-    var dish_button_row = document.createElement("div");
-    dish_button_row.setAttribute("class", "row justify-content-end m-0 p-0");
-
-        var dish_bookmark_div = document.createElement("div");
-        dish_bookmark_div.setAttribute("class", "col-auto float-left");
-
-            // checks if dish is bookmarked in localStorage
-            if (dish["name"] in localStorage){
-                var dish_bookmark_i = document.createElement("i");
-                dish_bookmark_i.setAttribute("class", "fa fa-bookmark p-0 m-0 fs-3 float-right bookmark-dish-checked");
-                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
-            } else {
-                var dish_bookmark_i = document.createElement("i");
-                dish_bookmark_i.setAttribute("class", "fa fa-bookmark-o p-0 m-0 fs-3 float-right bookmark-dish-unchecked");
-                dish_bookmark_i.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
-            }
-
-            
-
-        dish_bookmark_div.appendChild(dish_bookmark_i);
-        dish_button_row.appendChild(dish_bookmark_div);
-    dish_col.appendChild(dish_button_row);
 
     // create defining characteristics
     var dish_def_char_h4 = document.createElement("h4");
@@ -259,7 +261,7 @@ function create_section(dish_data){
     var new_row = document.createElement("div");
     new_row.setAttribute("class", "row justify-content-evenly m-auto align-center");
 
-    new_row.appendChild(picture_carousel(dish_data));
+    new_row.appendChild(picture_carousel(dish_data, name_country));
     new_row.appendChild(create_dish_info(dish_data));
 
     section_container.appendChild(new_row)
@@ -280,19 +282,21 @@ document.body.onclick = function(e) {   //when the document body is clicked
         if (e.className && e.className.indexOf('bookmark-dish-unchecked') != -1){
 
             // get the h1 dish title and add it to local storage
-            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[0].children[0].textContent;
+            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[1].children[0].textContent;
+            console.log(bookmark_dish_name);
             localStorage.setItem(bookmark_dish_name.toString(), "checked");
 
             //if the element has a class name, and that is 'bookmark-dish' then...
-            e.className = "fa fa-bookmark p-0 fs-3 m-0 float-right bookmark-dish-checked";
+            e.className = "fa fa-bookmark p-0 fs-3 mt-3 float-right bookmark-dish-checked";
             e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
         } else if (e.className && e.className.indexOf('bookmark-dish-checked') != -1){
 
             // get the h1 dish title and add it to local storage
-            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[0].children[0].textContent;
+            var bookmark_dish_name = e.parentNode.parentNode.parentNode.children[1].children[0].textContent;
+            console.log(bookmark_dish_name);
             localStorage.removeItem(bookmark_dish_name.toString());
 
-            e.className = "fa fa-bookmark-o p-0 fs-3 m-0 float-right bookmark-dish-unchecked";
+            e.className = "fa fa-bookmark-o p-0 fs-3 mt-3 float-right bookmark-dish-unchecked";
             e.className += " text-" + c_image_amounts[name_country]["bootstrap-color"];
             //if the element has a class name, and that is 'bookmark-dish' then...
         }
