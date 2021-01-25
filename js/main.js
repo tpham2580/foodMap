@@ -164,7 +164,7 @@ function picture_carousel(dish, name_country){
                 //images url to add to carousel
                 var new_image = document.createElement("img");
                 //var image_url = "../images/" + name_country + "/" + dish_name;
-                new_image.setAttribute("src", "../images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
+                new_image.setAttribute("src", "./images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
                 new_image.setAttribute("class", "d-block w-100");
                 new_image.setAttribute("alt", dish_name + " " + image);
 
