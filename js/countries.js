@@ -5,6 +5,9 @@
 var c_image_amounts;
 var countries_reference;
 
+if (document.getElementById("main") == null){
+    return
+}
 fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
