@@ -4,11 +4,11 @@ var c_image_amounts;
 var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
-fetch("./website_json/country_image_amounts.json")
+fetch(window.location.href + "website_json/country_image_amounts.json")
     .then(res => res.json()).then(json => {
         c_image_amounts = json;
 })
-.then(fetch("./website_json/countries_reference.json")
+.then(fetch(window.location.href + "website_json/countries_reference.json")
     .then(response => response.json()).then(json => {
         countries_reference = json;
     })
