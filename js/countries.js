@@ -5,37 +5,35 @@
 var c_image_amounts;
 var countries_reference;
 
-if (document.getElementById("main") == null){
-    return
+if (document.getElementById("main") !== null){
+    fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
+        c_image_amounts = json;
+    })
+    .then(fetch("../website_json/countries_reference.json").then(response => response.json()).then(json => {
+        countries_reference = json;
+        time_to_fetch();
+    }));
+
+    // gets the country name from the path
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    var name_country = page.split('.').slice(0, -1).join('.').toString();
+
+    var fetch_url // sets the fetch_url variable
+
+    // fetch response to get json data of all dishes from specified country
+    function time_to_fetch(){
+        fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_reference["country-to-3"][name_country] + "/";
+        fetch(fetch_url, {
+            mode: 'cors',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).then(response => response.json()).then(json => {
+                    main_function(json);
+            }).catch(err => console.log(err));
+    }
 }
-fetch("../website_json/country_image_amounts.json").then(res => res.json()).then(json => {
-    c_image_amounts = json;
-})
-.then(fetch("../website_json/countries_reference.json").then(response => response.json()).then(json => {
-    countries_reference = json;
-    time_to_fetch();
-}));
-
-// gets the country name from the path
-var path = window.location.pathname;
-var page = path.split("/").pop();
-var name_country = page.split('.').slice(0, -1).join('.').toString();
-
-var fetch_url // sets the fetch_url variable
-
-// fetch response to get json data of all dishes from specified country
-function time_to_fetch(){
-    fetch_url = "https://foodmap-backend-nxjye5q3fq-uc.a.run.app/country/" + countries_reference["country-to-3"][name_country] + "/";
-    fetch(fetch_url, {
-        mode: 'cors',
-        headers: {
-            'Content-Type':'application/x-www-form-urlencoded'
-        }
-    }).then(response => response.json()).then(json => {
-                main_function(json);
-        }).catch(err => console.log(err));
-}
-
 // creates picture_carousel
 export default function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
