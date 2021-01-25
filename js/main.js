@@ -6,7 +6,7 @@ var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
 var main_container = document.getElementById("main-container")
-fetch("./website_json/country_image_amounts.json", {
+fetch(window.location.href + "/website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
@@ -15,7 +15,7 @@ fetch("./website_json/country_image_amounts.json", {
     ).then(res => res.json()).then(json => {
     c_image_amounts = json;
 })
-.then(fetch("./website_json/countries_reference.json", {
+.then(fetch(window.location.href + "/website_json/countries_reference.json", {
         mode: 'no-cors',
         headers: {
             'Content-Type':'application/x-www-form-urlencoded'
