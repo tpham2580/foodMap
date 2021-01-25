@@ -4,6 +4,7 @@ var c_image_amounts;
 var countries_reference;
 var post_bookmark_json = {"bookmarks": {}};
 var bookmarked_json;
+console.log(window.location.href);
 fetch(window.location + "/website_json/country_image_amounts.json", {
         mode: 'no-cors',
         headers: {
