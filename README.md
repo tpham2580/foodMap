@@ -16,6 +16,8 @@ Tim's Food Map is a website that displays all of the different dishes I have eve
 
 #### Future Updates
 - [ ]  Update About-Me Page
+- [ ]  Collapsible Accordian FAQ
+- [ ]  On hover message for bookmark buttons on each dish
 - [ ]  Dark mode button
 - [ ]  Button in each dish information section that generates pdf of my favorite recipe for the dish
 - [ ]  Bookmarked dish will show up in Home page
