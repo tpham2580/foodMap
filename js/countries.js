@@ -138,7 +138,7 @@ function picture_carousel(dish, name_country){
     food_carousel.setAttribute("data-bs-ride", "carousel");
     
         // append inner carousel div to food carousel
-        food_carousel.appendChild(create_div_carousel_inner(dish_name, country_name));
+        food_carousel.appendChild(create_div_carousel_inner(dish_name, name_country));
 
         // append prev button for carousel to div
         food_carousel.appendChild(create_a_carousel_prev(dish_name_w_dashes));
