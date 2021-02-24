@@ -66,6 +66,8 @@ function create_div_carousel_inner(dish_name, name_country){
             // append div to outer div
             div_carousel_inner.appendChild(div_carousel_item);
         }
+
+    return div_carousel_inner;
 }
 
 // creates prev button for carousel
@@ -92,6 +94,7 @@ function create_a_carousel_prev(dish_name_w_dashes) {
         // append span to a
         a_carousel_prev.appendChild(span_carousel_prev_hidden);
 
+    return a_carousel_prev;
 }
 
 //creates next button for carousel
@@ -118,9 +121,9 @@ function create_a_carousel_next(dish_name_w_dashes){
         // append span to a
         a_carousel_next.appendChild(span_carousel_next_hidden);
 
+    return a_carousel_next;
 }
 
-// creates picture_carousel
 function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
     new_col.setAttribute("class", "col-xxl-6 col-xl-12 p-0 my-auto");
@@ -149,12 +152,7 @@ function picture_carousel(dish, name_country){
     return new_col
 }
 
-// creates dish information
-function create_dish_info(dish){
-    var dish_col = document.createElement("div");
-    dish_col.setAttribute("class", "col-xxl-6 col-xl-12 px-4 py-2");
-
-    // create button row
+function create_dish_button_row(dish){
     var dish_button_row = document.createElement("div");
     dish_button_row.setAttribute("class", "row justify-content-end m-0 p-0");
 
@@ -176,45 +174,74 @@ function create_dish_info(dish){
 
         dish_bookmark_div.appendChild(dish_bookmark_i);
         dish_button_row.appendChild(dish_bookmark_div);
-    dish_col.appendChild(dish_button_row);
+    
+    return dish_button_row;
+}
 
-    // create title row with cuisine tag
-    var dish_title_row = document.createElement("div");
-    dish_title_row.setAttribute("class", "row");
+function create_dish_title_div(dish){
+    var dish_title_div = document.createElement("div");
+    dish_title_div.setAttribute("class", "col-fluid float-left");
+        var dish_title_h1 = document.createElement("h1");
+        dish_title_h1.setAttribute("class", "text-dark");
+        dish_title_h1.textContent = dish["name"];
+    dish_title_div.appendChild(dish_title_h1);
 
-        // create dish title in title div to float left
-        var dish_title_div = document.createElement("div");
-        dish_title_div.setAttribute("class", "col-fluid float-left");
-            var dish_title_h1 = document.createElement("h1");
-            dish_title_h1.setAttribute("class", "text-dark");
-            dish_title_h1.textContent = dish["name"];
-        dish_title_div.appendChild(dish_title_h1);
-        dish_title_row.appendChild(dish_title_div);
+    return dish_title_div;
+}
 
-        // create button for cuisine name and append it to dish_col
-        var dish_cuisine_div = document.createElement("div");
+function create_dish_cuisine_div(dish){
+    var dish_cuisine_div = document.createElement("div");
         dish_cuisine_div.setAttribute("class", "col-auto float-right");
             var dish_cuisine_a = document.createElement("a");
             dish_cuisine_a.setAttribute("class", "btn bg-light text-dark disabled");
             dish_cuisine_a.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"]
             dish_cuisine_a.textContent = dish["cuisine"];
         dish_cuisine_div.appendChild(dish_cuisine_a);
-        dish_title_row.appendChild(dish_cuisine_div);
+
+    return dish_cuisine_div;
+}
+
+function check_dish_area(dish, dish_title_row){
+    if (dish["area"].toLowerCase() !== name_country){
+        var dish_area_div = document.createElement("div");
+        dish_area_div.setAttribute("class", "col-auto float-right");
+            var dish_area_a = document.createElement("a");
+            dish_area_a.setAttribute("class", "btn bg-light text-dark disabled");
+            dish_area_a.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"]
+            dish_area_a.textContent = dish["area"];
+        dish_area_div.appendChild(dish_area_a);
+        dish_title_row.appendChild(dish_area_div);
+    }
+    return
+}
+
+function create_dish_title_row(dish){
+    // create title row with cuisine tag
+    var dish_title_row = document.createElement("div");
+    dish_title_row.setAttribute("class", "row");
+
+        // create dish title in title div to float left
+        dish_title_row.appendChild(create_dish_title_div(dish));
+
+        // create button for cuisine name and append it to dish_col
+        dish_title_row.appendChild(create_dish_cuisine_div(dish));
 
         // add area if not equal to country name
-        if (dish["area"].toLowerCase() !== name_country){
-            var dish_area_div = document.createElement("div");
-            dish_area_div.setAttribute("class", "col-auto float-right");
-                var dish_area_a = document.createElement("a");
-                dish_area_a.setAttribute("class", "btn bg-light text-dark disabled");
-                dish_area_a.className += " btn-outline-" + c_image_amounts[name_country]["bootstrap-color"]
-                dish_area_a.textContent = dish["area"];
-            dish_area_div.appendChild(dish_area_a);
-            dish_title_row.appendChild(dish_area_div);
-        }
+        check_dish_area(dish, dish_title_row);
+
+    return dish_title_row;
+}
+
+// creates dish information
+function create_dish_info(dish){
+    var dish_col = document.createElement("div");
+    dish_col.setAttribute("class", "col-xxl-6 col-xl-12 px-4 py-2");
+
+    // create button row
+    dish_col.appendChild(create_dish_button_row(dish));
 
     // append everything in title row to dish_col
-    dish_col.appendChild(dish_title_row);
+    dish_col.appendChild(create_dish_title_row(dish));
 
     // add horizontal line
     dish_col.appendChild(document.createElement("hr"));

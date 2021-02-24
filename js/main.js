@@ -129,6 +129,42 @@ function main_one(){
 
 };
 
+function create_div_carousel_inner(dish_name, name_country){
+    // create div with class="carousel-inner"
+    var div_carousel_inner = document.createElement("div");
+    div_carousel_inner.setAttribute("class", "carousel-inner");
+        
+        //for loop to add all dish images to carousel
+        var amount_images = c_image_amounts[name_country][dish_name.toString()];
+        for (var image=1; image<amount_images+1;image++){
+            // create div with class="carousel-item"
+            var div_carousel_item = document.createElement("div");
+            div_carousel_item.setAttribute("class", "carousel-item");
+
+            // if image == 1, append active to class
+            if (image==1){
+                div_carousel_item.setAttribute("class", "carousel-item active");
+            } else {
+                div_carousel_item.setAttribute("class", "carousel-item");
+            }
+
+            //images url to add to carousel
+            var new_image = document.createElement("img");
+            //var image_url = "../images/" + name_country + "/" + dish_name;
+            new_image.setAttribute("src", "./images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
+            new_image.setAttribute("class", "d-block w-100");
+            new_image.setAttribute("alt", dish_name + " " + image);
+
+            // append image to div
+            div_carousel_item.appendChild(new_image);
+
+            // append div to outer div
+            div_carousel_inner.appendChild(div_carousel_item);
+        }
+
+    return div_carousel_inner;
+}
+
 // creates picture_carousel
 function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
@@ -200,40 +236,6 @@ function picture_carousel(dish, name_country){
     new_col.appendChild(food_carousel);
 
     return new_col
-}
-
-function create_div_carousel_inner(dish_name, name_country){
-    // create div with class="carousel-inner"
-    var div_carousel_inner = document.createElement("div");
-    div_carousel_inner.setAttribute("class", "carousel-inner");
-        
-        //for loop to add all dish images to carousel
-        var amount_images = c_image_amounts[name_country][dish_name.toString()];
-        for (var image=1; image<amount_images+1;image++){
-            // create div with class="carousel-item"
-            var div_carousel_item = document.createElement("div");
-            div_carousel_item.setAttribute("class", "carousel-item");
-
-            // if image == 1, append active to class
-            if (image==1){
-                div_carousel_item.setAttribute("class", "carousel-item active");
-            } else {
-                div_carousel_item.setAttribute("class", "carousel-item");
-            }
-
-            //images url to add to carousel
-            var new_image = document.createElement("img");
-            //var image_url = "../images/" + name_country + "/" + dish_name;
-            new_image.setAttribute("src", "./images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
-            new_image.setAttribute("class", "d-block w-100");
-            new_image.setAttribute("alt", dish_name + " " + image);
-
-            // append image to div
-            div_carousel_item.appendChild(new_image);
-
-            // append div to outer div
-            div_carousel_inner.appendChild(div_carousel_item);
-        }
 }
 
 function add_dropdown_countries(){
