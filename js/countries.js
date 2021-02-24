@@ -33,6 +33,93 @@ function time_to_fetch(){
         }).catch(err => console.log(err));
 }
 
+// creates inner carousel div
+function create_div_carousel_inner(dish_name, name_country){
+    // create div with class="carousel-inner"
+    var div_carousel_inner = document.createElement("div");
+    div_carousel_inner.setAttribute("class", "carousel-inner");
+        
+        //for loop to add all dish images to carousel
+        var amount_images = c_image_amounts[name_country][dish_name.toString()];
+        for (var image=1; image<amount_images+1;image++){
+            // create div with class="carousel-item"
+            var div_carousel_item = document.createElement("div");
+            div_carousel_item.setAttribute("class", "carousel-item");
+
+            // if image == 1, append active to class
+            if (image==1){
+                div_carousel_item.setAttribute("class", "carousel-item active");
+            } else {
+                div_carousel_item.setAttribute("class", "carousel-item");
+            }
+
+            //images url to add to carousel
+            var new_image = document.createElement("img");
+            //var image_url = "../images/" + name_country + "/" + dish_name;
+            new_image.setAttribute("src", "../images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
+            new_image.setAttribute("class", "d-block w-100");
+            new_image.setAttribute("alt", dish_name + " " + image);
+
+            // append image to div
+            div_carousel_item.appendChild(new_image);
+
+            // append div to outer div
+            div_carousel_inner.appendChild(div_carousel_item);
+        }
+}
+
+// creates prev button for carousel
+function create_a_carousel_prev(dish_name_w_dashes) {
+    // create a with class="carousel-control-prev" href="#foodCarousel-" + dish_name_w_dashes role="button" data-bs-slide="prev"
+    var a_carousel_prev = document.createElement("a");
+    a_carousel_prev.setAttribute("class", "carousel-control-prev");
+    a_carousel_prev.setAttribute("href", "#foodCarousel-" + dish_name_w_dashes);
+    a_carousel_prev.setAttribute("role", "button");
+    a_carousel_prev.setAttribute("data-bs-slide", "prev");
+        // create span with class="carousel-control-prev-icon" aria-hidden="true"
+        var span_carousel_prev_icon = document.createElement("span");
+        span_carousel_prev_icon.setAttribute("class", "carousel-control-prev-icon");
+        span_carousel_prev_icon.setAttribute("aria-hidden", "true");
+
+        // append span to a
+        a_carousel_prev.appendChild(span_carousel_prev_icon);
+
+        // create span with class="visually-hidden" and textContent="Previous"
+        var span_carousel_prev_hidden = document.createElement("span");
+        span_carousel_prev_hidden.setAttribute("class", "visually-hidden");
+        span_carousel_prev_hidden.textContent = "Previous";
+
+        // append span to a
+        a_carousel_prev.appendChild(span_carousel_prev_hidden);
+
+}
+
+//creates next button for carousel
+function create_a_carousel_next(dish_name_w_dashes){
+    // create a with class="carousel-control-next" href="#foodCarousel-" + dish_name_w_dashes role="button" data-bs-slide="next"
+    var a_carousel_next = document.createElement("a");
+    a_carousel_next.setAttribute("class", "carousel-control-next");
+    a_carousel_next.setAttribute("href", "#foodCarousel-" + dish_name_w_dashes);
+    a_carousel_next.setAttribute("role", "button");
+    a_carousel_next.setAttribute("data-bs-slide", "next");
+        // create span with class="carousel-control-next-icon" aria-hidden="true"
+        var span_carousel_next_icon = document.createElement("span");
+        span_carousel_next_icon.setAttribute("class", "carousel-control-next-icon");
+        span_carousel_next_icon.setAttribute("aria-hidden", "true");
+
+        // append span to a
+        a_carousel_next.appendChild(span_carousel_next_icon);
+
+        // create span with class="visually-hidden" and textContent="Next"
+        var span_carousel_next_hidden = document.createElement("span");
+        span_carousel_next_hidden.setAttribute("class", "visually-hidden");
+        span_carousel_next_hidden.textContent = "Next";
+
+        // append span to a
+        a_carousel_next.appendChild(span_carousel_next_hidden);
+
+}
+
 // creates picture_carousel
 function picture_carousel(dish, name_country){
     var new_col = document.createElement("div");
@@ -40,7 +127,6 @@ function picture_carousel(dish, name_country){
 
     var dish_name = dish["name"];
     var dish_name_w_dashes = dish_name.replace(/\s+/g, "-");
-    var amount_images = c_image_amounts[name_country][dish_name.toString()];
 
     // create div with id="foodCarousel-" + dish_name_w_dashes, class="carousel slide" and data-bs-ride="carousel"
     var food_carousel = document.createElement("div");
@@ -48,89 +134,14 @@ function picture_carousel(dish, name_country){
     food_carousel.setAttribute("class", "carousel slide");
     food_carousel.setAttribute("data-bs-ride", "carousel");
     
-        // create div with class="carousel-inner"
-        var div_carousel_inner = document.createElement("div");
-        div_carousel_inner.setAttribute("class", "carousel-inner");
-            
-            //for loop to add all dish images to carousel
-            for (var image=1; image<amount_images+1;image++){
-                // create div with class="carousel-item"
-                var div_carousel_item = document.createElement("div");
-                div_carousel_item.setAttribute("class", "carousel-item");
+        // append inner carousel div to food carousel
+        food_carousel.appendChild(create_div_carousel_inner(dish_name, country_name));
 
-                // if image == 1, append active to class
-                if (image==1){
-                    div_carousel_item.setAttribute("class", "carousel-item active");
-                } else {
-                    div_carousel_item.setAttribute("class", "carousel-item");
-                }
-
-                //images url to add to carousel
-                var new_image = document.createElement("img");
-                //var image_url = "../images/" + name_country + "/" + dish_name;
-                new_image.setAttribute("src", "../images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
-                new_image.setAttribute("class", "d-block w-100");
-                new_image.setAttribute("alt", dish_name + " " + image);
-
-                // append image to div
-                div_carousel_item.appendChild(new_image);
-
-                // append div to outer div
-                div_carousel_inner.appendChild(div_carousel_item);
-            }
-        // append div to outer div
-        food_carousel.appendChild(div_carousel_inner);
-
-        
-        // create a with class="carousel-control-prev" href="#foodCarousel-" + dish_name_w_dashes role="button" data-bs-slide="prev"
-        var a_carousel_prev = document.createElement("a");
-        a_carousel_prev.setAttribute("class", "carousel-control-prev");
-        a_carousel_prev.setAttribute("href", "#foodCarousel-" + dish_name_w_dashes);
-        a_carousel_prev.setAttribute("role", "button");
-        a_carousel_prev.setAttribute("data-bs-slide", "prev");
-            // create span with class="carousel-control-prev-icon" aria-hidden="true"
-            var span_carousel_prev_icon = document.createElement("span");
-            span_carousel_prev_icon.setAttribute("class", "carousel-control-prev-icon");
-            span_carousel_prev_icon.setAttribute("aria-hidden", "true");
-
-            // append span to a
-            a_carousel_prev.appendChild(span_carousel_prev_icon);
-
-            // create span with class="visually-hidden" and textContent="Previous"
-            var span_carousel_prev_hidden = document.createElement("span");
-            span_carousel_prev_hidden.setAttribute("class", "visually-hidden");
-            span_carousel_prev_hidden.textContent = "Previous";
-
-            // append span to a
-            a_carousel_prev.appendChild(span_carousel_prev_hidden);
+        // append prev button for carousel to div
+        food_carousel.appendChild(create_a_carousel_prev(dish_name_w_dashes));
 
         // append a to div
-        food_carousel.appendChild(a_carousel_prev);
-
-        // create a with class="carousel-control-next" href="#foodCarousel-" + dish_name_w_dashes role="button" data-bs-slide="next"
-        var a_carousel_next = document.createElement("a");
-        a_carousel_next.setAttribute("class", "carousel-control-next");
-        a_carousel_next.setAttribute("href", "#foodCarousel-" + dish_name_w_dashes);
-        a_carousel_next.setAttribute("role", "button");
-        a_carousel_next.setAttribute("data-bs-slide", "next");
-            // create span with class="carousel-control-next-icon" aria-hidden="true"
-            var span_carousel_next_icon = document.createElement("span");
-            span_carousel_next_icon.setAttribute("class", "carousel-control-next-icon");
-            span_carousel_next_icon.setAttribute("aria-hidden", "true");
-
-            // append span to a
-            a_carousel_next.appendChild(span_carousel_next_icon);
-
-            // create span with class="visually-hidden" and textContent="Next"
-            var span_carousel_next_hidden = document.createElement("span");
-            span_carousel_next_hidden.setAttribute("class", "visually-hidden");
-            span_carousel_next_hidden.textContent = "Next";
-
-            // append span to a
-            a_carousel_next.appendChild(span_carousel_next_hidden);
-
-        // append a to div
-        food_carousel.appendChild(a_carousel_next);
+        food_carousel.appendChild(create_a_carousel_next(dish_name_w_dashes));
 
     // append div to new_col
     new_col.appendChild(food_carousel);

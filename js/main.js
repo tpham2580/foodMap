@@ -136,7 +136,6 @@ function picture_carousel(dish, name_country){
 
     var dish_name = dish["name"];
     var dish_name_w_dashes = dish_name.replace(/\s+/g, "-");
-    var amount_images = c_image_amounts[name_country][dish_name.toString()];
 
     // create div with id="foodCarousel-" + dish_name_w_dashes, class="carousel slide" and data-bs-ride="carousel"
     var food_carousel = document.createElement("div");
@@ -144,40 +143,9 @@ function picture_carousel(dish, name_country){
     food_carousel.setAttribute("class", "carousel slide");
     food_carousel.setAttribute("data-bs-ride", "carousel");
     
-        // create div with class="carousel-inner"
-        var div_carousel_inner = document.createElement("div");
-        div_carousel_inner.setAttribute("class", "carousel-inner");
-            
-            //for loop to add all dish images to carousel
-            for (var image=1; image<amount_images+1;image++){
-                // create div with class="carousel-item"
-                var div_carousel_item = document.createElement("div");
-                div_carousel_item.setAttribute("class", "carousel-item");
+        // append inner carousel div to outer div
+        food_carousel.appendChild(create_div_carousel_inner(dish_name, name_country));
 
-                // if image == 1, append active to class
-                if (image==1){
-                    div_carousel_item.setAttribute("class", "carousel-item active");
-                } else {
-                    div_carousel_item.setAttribute("class", "carousel-item");
-                }
-
-                //images url to add to carousel
-                var new_image = document.createElement("img");
-                //var image_url = "../images/" + name_country + "/" + dish_name;
-                new_image.setAttribute("src", "./images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
-                new_image.setAttribute("class", "d-block w-100");
-                new_image.setAttribute("alt", dish_name + " " + image);
-
-                // append image to div
-                div_carousel_item.appendChild(new_image);
-
-                // append div to outer div
-                div_carousel_inner.appendChild(div_carousel_item);
-            }
-        // append div to outer div
-        food_carousel.appendChild(div_carousel_inner);
-
-        
         // create a with class="carousel-control-prev" href="#foodCarousel-" + dish_name_w_dashes role="button" data-bs-slide="prev"
         var a_carousel_prev = document.createElement("a");
         a_carousel_prev.setAttribute("class", "carousel-control-prev");
@@ -232,6 +200,40 @@ function picture_carousel(dish, name_country){
     new_col.appendChild(food_carousel);
 
     return new_col
+}
+
+function create_div_carousel_inner(dish_name, name_country){
+    // create div with class="carousel-inner"
+    var div_carousel_inner = document.createElement("div");
+    div_carousel_inner.setAttribute("class", "carousel-inner");
+        
+        //for loop to add all dish images to carousel
+        var amount_images = c_image_amounts[name_country][dish_name.toString()];
+        for (var image=1; image<amount_images+1;image++){
+            // create div with class="carousel-item"
+            var div_carousel_item = document.createElement("div");
+            div_carousel_item.setAttribute("class", "carousel-item");
+
+            // if image == 1, append active to class
+            if (image==1){
+                div_carousel_item.setAttribute("class", "carousel-item active");
+            } else {
+                div_carousel_item.setAttribute("class", "carousel-item");
+            }
+
+            //images url to add to carousel
+            var new_image = document.createElement("img");
+            //var image_url = "../images/" + name_country + "/" + dish_name;
+            new_image.setAttribute("src", "./images/" + name_country + "/" + dish_name + "/" + dish_name + " " + image + ".jpg");
+            new_image.setAttribute("class", "d-block w-100");
+            new_image.setAttribute("alt", dish_name + " " + image);
+
+            // append image to div
+            div_carousel_item.appendChild(new_image);
+
+            // append div to outer div
+            div_carousel_inner.appendChild(div_carousel_item);
+        }
 }
 
 function add_dropdown_countries(){
