@@ -20,6 +20,8 @@ Tim's Food Map is a website that displays all of the different dishes I have eve
 
 #### Future Updates
 - [ ]  Update About-Me Page
+- [ ]  Upload images to seperate website
+- [ ]  Change image links
 - [ ]  Collapsible Accordian FAQ
 - [ ]  On hover message for bookmark buttons on each dish
 - [ ]  Dark mode button
