@@ -17,9 +17,11 @@ Tim's Food Map is a website that displays all of the different dishes I have eve
 - [X]  Countries page properly resizes depending on screen size
 - [X]  Bookmark Button for each dish that saves dish to local storage
 - [X]  sends form-encoded localstorage data to Django server and receives all json dish data from bookmarks
+- [X]  Update About-Me Page
 
 #### Future Updates
-- [ ]  Update About-Me Page
+- [ ]  implement search feature
+- [ ]  oncountryhover, suggest a dish
 - [ ]  Upload images to seperate website
 - [ ]  Change image links
 - [ ]  Collapsible Accordian FAQ
